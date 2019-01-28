@@ -1,0 +1,7 @@
+quadraticRealSolutionQty if quadraticDiscriminant == 0
+                            else if
+                            quadraticDiscriminant < 0
+                            x = 0 
+                            else
+                            quadraticDiscriminant > 0
+                            x = 2
