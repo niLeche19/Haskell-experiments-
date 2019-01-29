@@ -1,13 +1,18 @@
-quadraticRealSolutionQty if quadraticDiscriminant == 0
-                            else if
-                            quadraticDiscriminant < 0
-                            x = 0 
-                            else
-                            quadraticDiscriminant > 0
-                            x = 2
-                            
+quadraticRealSolutionQty x y = if quadraticVertex x y == 0
+                                    then 1
+                                    else if quadraticVertex x y < 0
+                                    then 0
+                                    else if quadraticVertex x y > 0 
+                                    then 2
 tester x = if x == 1
             then 100
             else if x == 2
             then 200
             else x
+            
+            
+            then (t-32)/1.8
+            else if s == "c"
+            then (1.8t)+32
+            
+( ͡° ͜ʖ ͡°)
