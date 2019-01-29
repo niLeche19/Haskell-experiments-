@@ -9,7 +9,6 @@ quadraticRealSolutionQty a b c = if quadraticDiscriminant a b c == 0
                                     else if quadraticDiscriminant a b c < 0
                                     then 0
                                     else 2
-    
 
 convertFtoC f = (f-32)/1.8
 
