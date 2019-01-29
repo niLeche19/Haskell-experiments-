@@ -1,6 +1,8 @@
 module PTfunctions where
 
-quadraticVertex b a = -b/(2a)
+quadraticVertex a b = -b/2*a
 
-quadraticDiscriminant b a = b^2 - 4a
+quadraticDiscriminant a b = b^2 - 4a
+
+a = 110
 

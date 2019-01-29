@@ -5,3 +5,9 @@ quadraticRealSolutionQty if quadraticDiscriminant == 0
                             else
                             quadraticDiscriminant > 0
                             x = 2
+                            
+tester x = if x == 1
+            then 100
+            else if x == 2
+            then 200
+            else x
