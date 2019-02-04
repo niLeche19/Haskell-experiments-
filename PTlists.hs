@@ -12,7 +12,7 @@ module PTlists where
   function!
 -}
 
-allLowerCaseLetters = -- put your code here
+allLowerCaseLetters = ['a'..'z'] -- put your code here
 
 {- 
   Create a function called allIntegersInclusive that accepts two integer values,
@@ -25,7 +25,9 @@ allLowerCaseLetters = -- put your code here
   [7,6,5,4,3]
 -}
 
-allIntegersInclusive a b = -- put your code here
+allIntegersInclusive a b = if a < b-- put your code here
+                            then [a..b]
+                            else reverse [b..a]
 
 {-
   Create a function called allIntegersExcludingFirst that accepts two integer
@@ -37,14 +39,15 @@ allIntegersInclusive a b = -- put your code here
   [5,4,3,2]
 -}
 
-allIntegersExcludingFirst a b = -- put your code here
-
+allIntegersExcludingFirst a b = if a < b
+                                then tail [a..b]
+                                else tail (reverse [b..a])
 {- 
   Create a function called allThousands that returns a list of integers beginning
   with 1000 and ending with 9999.
 -}
 
-allThousands = -- put your code here
+--allThousands = -- put your code here
 
 {-
   Create a function called integersUpDownUp that accepts four integer values,
@@ -58,7 +61,14 @@ allThousands = -- put your code here
   [6,5,4,3,2,3,4,5,6,7,8,9,10]
 -}
 
-integersUpDownUp a b c d = -- put your code here
+integersUpDownUp a b c d = (if a < b 
+then [a..b] 
+else reverse [b..a]) ++ (if b < c 
+then tail [b..c] 
+else tail (reverse [c..b])) ++ (if c < d 
+then tail [c..d]
+else tail (reverse [d..c]))
+
 
 {-
   Create a function called isDivisor that accepts two integers n and d and
@@ -71,7 +81,7 @@ integersUpDownUp a b c d = -- put your code here
   False
 -}
 
-isDivisor n d = -- put your code here
+--isDivisor n d = -- put your code here
 
 {- 
   Create a function called divisors that accepts an integer, n, and returns
@@ -83,7 +93,7 @@ isDivisor n d = -- put your code here
   Hint: use a list comprehension.
 -}
 
-divisors n = -- put your code here
+--divisors n = -- put your code here
 
 {-
   Create a function called isPerfect that accepts an integer, n, and returns 
@@ -95,7 +105,7 @@ divisors n = -- put your code here
   True
 -}
 
-isPerfect n = -- put your code here
+--isPerfect n = -- put your code here
 
 {-
   Create a function called allPerfects that accepts an integer, n, and returns
@@ -105,7 +115,7 @@ isPerfect n = -- put your code here
   [6,28]
 -}
 
-allPerfects n = -- put your code here
+--allPerfects n = -- put your code here
 
 {-
   Create a function called isRigid that accepts an integer, n, and returns
@@ -129,7 +139,7 @@ allPerfects n = -- put your code here
   of the problem.
 -}
 
-isRigid n = -- put your code here
+--isRigid n = -- put your code here
 
 {-
   Create a function called allRigids that accepts an integer, n, and returns
@@ -139,7 +149,7 @@ isRigid n = -- put your code here
   [1,2,3,4,5,6,7,8,9,22,123,132,213,231,312,321]
 -}
 
-allRigids n = -- put your code here
+--allRigids n = -- put your code here
 
 {-
   Create a function called fizzBuzz that accepts integers n, f, and b. 
@@ -152,5 +162,5 @@ allRigids n = -- put your code here
   ["1","Fizz","Buzz","4","5","FizzBuzz","7","Fizz","Buzz","10"]
 -}
 
-fizzBuzz n f b = -- put your code here
+--fizzBuzz n f b = -- put your code here
 
