@@ -47,7 +47,7 @@ allIntegersExcludingFirst a b = if a < b
   with 1000 and ending with 9999.
 -}
 
---allThousands = -- put your code here
+allThousands = [1000..9999]-- put your code here
 
 {-
   Create a function called integersUpDownUp that accepts four integer values,
@@ -81,7 +81,9 @@ else tail (reverse [d..c]))
   False
 -}
 
---isDivisor n d = -- put your code here
+isDivisor n d = if n `mod` d == 0-- put your code here
+then True
+else False
 
 {- 
   Create a function called divisors that accepts an integer, n, and returns
@@ -93,7 +95,7 @@ else tail (reverse [d..c]))
   Hint: use a list comprehension.
 -}
 
---divisors n = -- put your code here
+divisors n = [x | x <- [1..n], n `mod` x == 0, x /= n]-- put your code here
 
 {-
   Create a function called isPerfect that accepts an integer, n, and returns 
@@ -105,7 +107,9 @@ else tail (reverse [d..c]))
   True
 -}
 
---isPerfect n = -- put your code here
+isPerfect n = if sum (divisors n) == n -- put your code here
+then True
+else False
 
 {-
   Create a function called allPerfects that accepts an integer, n, and returns
@@ -115,7 +119,7 @@ else tail (reverse [d..c]))
   [6,28]
 -}
 
---allPerfects n = -- put your code here
+allPerfects n = [x | x <- [1..n], isPerfect x == True]-- put your code here
 
 {-
   Create a function called isRigid that accepts an integer, n, and returns
@@ -137,9 +141,12 @@ else tail (reverse [d..c]))
   Hint: In Haskell, 'a' is not the same as "a".
   Hint: Break the problem down into sub-functions that handle individual pieces
   of the problem.
--}
-
---isRigid n = -- put your code here
+-}                                  -- put your code here
+mString s =  [x : [] |x  <- (show s)]
+mStr s = [(read :: String -> Int) x | x <- mString s]
+isRigid n = if sum (mStr n) == product (mStr n)
+then True 
+else False
 
 {-
   Create a function called allRigids that accepts an integer, n, and returns
@@ -149,7 +156,7 @@ else tail (reverse [d..c]))
   [1,2,3,4,5,6,7,8,9,22,123,132,213,231,312,321]
 -}
 
---allRigids n = -- put your code here
+allRigids n = [x | x <- [0..n], isRigid x == True]-- put your code here
 
 {-
   Create a function called fizzBuzz that accepts integers n, f, and b. 
@@ -161,6 +168,13 @@ else tail (reverse [d..c]))
   Prelude> fizzBuzz 10 2 3
   ["1","Fizz","Buzz","4","5","FizzBuzz","7","Fizz","Buzz","10"]
 -}
+check n f b = if n `mod` f == 0 && n `mod` b == 0 
+then "FizzBuzz"
+else if n `mod` b == 0
+then "Buzz"
+else if n `mod` f == 0 
+then "Fizz"
+else (show n)
 
---fizzBuzz n f b = -- put your code here
+fizzBuzz n f b = [check x f b | x <- [1..n]]-- put your code here
 
