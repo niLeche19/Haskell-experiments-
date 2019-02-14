@@ -17,4 +17,4 @@ tester x = if x == 1
             
 a = 110
 
-:set prompt "( ͡° ͜ʖ ͡°)  " 
+:set prompt "( ͡° ͜ʖ ͡°)>> "

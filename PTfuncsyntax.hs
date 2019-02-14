@@ -48,7 +48,15 @@ module PTfuncsyntax where
 -}
 
 windChillRisk :: (Floating a, Ord a) => a -> a -> String
-windChillRisk t v = "put your code here"
+twc t v= 35.74 + 0.6215*t - 35.75*v**0.16 + 0.4275*t*v**0.16
+windChillRisk t v 
+    | risk >= 16 = "Low Risk."
+    | risk >= -17 = "Moderate Risk"
+    | risk >= -38 = "High Risk"
+    | risk >= -53 = "Very High Risk"
+    | risk >= -65 = "Severe Risk"
+    | otherwise = "Extreme Risk"
+    where risk = 35.74 + 0.6215*t - 35.75*v**0.16 + 0.4275*t*v**0.16
 
 
 {-
