@@ -73,11 +73,11 @@ windChillRisk t v
 
 yoCount :: String -> Integer
 -- replace the "-99" bits with your own code below
-yoCount [] = -99 -- empty string passed in? How many yo is that?
-yoCount (_:[]) = -99 -- a single character passed in? How many yo is that?
-yoCount ('y':'o':s) = -99 -- a string starting with "yo". What to do here?
-yoCount ('Y':'o':s) = -99 -- a string starting with "Yo". What to do here?
-yoCount s = -99 -- a string that doesn't start with "yo" or "Yo". What to do here?
+yoCount [] = 0 -- empty string passed in? How many yo is that?
+yoCount (_:[]) = 0-- a single character passed in? How many yo is that?
+yoCount ('y':'o':s) = 1 + (yoCount s)-- a string starting with "yo". What to do here?
+yoCount ('Y':'o':s) = 1 + (yoCount s) -- a string starting with "Yo". What to do here?
+yoCount s = yoCount (tail s)-- a string that doesn't start with "yo" or "Yo". What to do here?
 
 
 {-
@@ -100,7 +100,7 @@ yoCount s = -99 -- a string that doesn't start with "yo" or "Yo". What to do her
 -}
 
 interestTable :: (Eq a, Integral a1, Num a, RealFrac a2) => a2 -> a2 -> a -> [a1]
-interestTable p r n = [-99]  -- your function here (may need more patterns!)
+interestTable p r n = [] -- your function here (may need more patterns!)
 
 
 {- 
@@ -119,7 +119,19 @@ interestTable p r n = [-99]  -- your function here (may need more patterns!)
 -}
 
 charToPhoneDigit :: Char -> Int
-charToPhoneDigit c = 0 -- put your code here
+chars = zip [0..25] ['a'..'z'] ++ zip [0..25] ['A'..'Z']
+nums' c = [fst x | x <- chars, snd x == c]
+charToPhoneDigit c -- put your code here
+                | nums <= 2   = 1
+                | nums <= 5   = 2
+                | nums <= 8   = 3
+                | nums <= 11  = 4
+                | nums <= 14  = 5
+                | nums <= 17  = 6
+                | nums <= 20  = 7
+                | nums <= 23  = 8
+                |otherwise = 9
+                where nums = head [fst x | x <- chars, snd x == c]
 
 
 {-
@@ -133,8 +145,11 @@ charToPhoneDigit c = 0 -- put your code here
 -}
 
 
-numListToNum :: [Int] -> Int
-numListToNum nums = 0 -- put your code here (more patterns needed?)
+numListToNum :: [Int] -> [String]
+numListToNum nums = [show x | x <- nums]
+
+
+                -- put your code here (more patterns needed?)
 
 
 {- 
