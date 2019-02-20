@@ -1,5 +1,5 @@
 module PTfuncsyntax where
-
+unshow x = (read :: String -> Int) x
 {-
   Examples that make use of some additional syntax features within 
   functions, and use of recursion for writing functions.
@@ -99,11 +99,19 @@ yoCount s = yoCount (tail s)-- a string that doesn't start with "yo" or "Yo". Wh
   [100,110,121,133,146,161]
 -}
 
-interestTable :: (Eq a, Integral a1, Num a, RealFrac a2) => a2 -> a2 -> a -> [a1]
-interestTable p r n = [] -- your function here (may need more patterns!)
+-- interestTable :: (Eq a, Integral a1, Num a, RealFrac a2) => a2 -> a2 -> a -> [a1]
+intCal p r n = [p * (1 + (0.01 * r))]
+interestTable p r n 
+                | n <= 0 = []
+                | otherwise = p : intCal p r n 
+                
+table p r n = [round (p * ((1 + 0.01 * r) ^ x)) | x <- [0..n]] -- it's not recursive but it works...
+                
+-- What is the syntax for Haskell's round function?
 
-
+-- a = p(0.01 * r)^n
 {- 
+    
   Create a function called charToPhoneDigit that accepts an upper and/or
   lower case character and converts it to a number according to the 
   number/letter mapping on a standard phone keypad. Only valid characters
@@ -145,11 +153,11 @@ charToPhoneDigit c -- put your code here
 -}
 
 
-numListToNum :: [Int] -> [String]
-numListToNum nums = [show x | x <- nums]
-
-
-                -- put your code here (more patterns needed?)
+numListToNum :: [Int] -> Int
+numListToNum' (x:[]) = show x
+numListToNum' (x:xs) = show x ++ numListToNum' xs
+numListToNum nums = (read :: String -> Int) (numListToNum' nums)
+-- put your code here (more patterns needed?)
 
 
 {- 
@@ -161,7 +169,7 @@ numListToNum nums = [show x | x <- nums]
   Hint: Use charToPhoneDigit and numListToNum. You may want to introduce 
         other small functions to help.
   For example:
-  
+   
   *PTfuncsyntax> wordsToPhone "pizza"
   74992
   *PTfuncsyntax> wordsToPhone "Good Morning, Vietnam"
@@ -169,4 +177,11 @@ numListToNum nums = [show x | x <- nums]
 -}
 
 wordsToPhone :: String -> Int
-wordsToPhone w = 0 -- put your code here
+chars' = ['a'..'z']++['A'..'Z']
+wordsToPhone' (x : xs)
+            | xs == [] = show (charToPhoneDigit x)
+            | elem x chars' == False = wordsToPhone' xs
+            | otherwise = (show (charToPhoneDigit x)) ++ (wordsToPhone' xs)
+
+wordsToPhone w = (read :: String -> Int) (wordsToPhone' w)
+
