@@ -100,16 +100,15 @@ yoCount s = yoCount (tail s)-- a string that doesn't start with "yo" or "Yo". Wh
 -}
 
 -- interestTable :: (Eq a, Integral a1, Num a, RealFrac a2) => a2 -> a2 -> a -> [a1]
-intCal p r n = [p * (1 + (0.01 * r))]
-interestTable p r n 
-                | n <= 0 = []
-                | otherwise = p : intCal p r n 
-                
-table p r n = [round (p * ((1 + 0.01 * r) ^ x)) | x <- [0..n]] -- it's not recursive but it works...
+intCal p r = round (p * (1 + (0.01 * r)))
+intYear p n = take n (repeat p)
+toInt :: Int -> [Int]
+toInt a = [a]
+-- interestTable' p r n = (toInt (intCal p r)) ++ toInt p
+
+interestTable p r n = [round (p * ((1 + 0.01 * r) ^ x)) | x <- [0..n]] -- it's not recursive but it works...
                 
 -- What is the syntax for Haskell's round function?
-
--- a = p(0.01 * r)^n
 {- 
     
   Create a function called charToPhoneDigit that accepts an upper and/or
@@ -127,17 +126,16 @@ table p r n = [round (p * ((1 + 0.01 * r) ^ x)) | x <- [0..n]] -- it's not recur
 -}
 
 charToPhoneDigit :: Char -> Int
-chars = zip [0..25] ['a'..'z'] ++ zip [0..25] ['A'..'Z']
+chars = zip [0..26] ['a'..'z'] ++ zip [0..26] ['A'..'Z']
 nums' c = [fst x | x <- chars, snd x == c]
 charToPhoneDigit c -- put your code here
-                | nums <= 2   = 1
-                | nums <= 5   = 2
-                | nums <= 8   = 3
-                | nums <= 11  = 4
-                | nums <= 14  = 5
-                | nums <= 17  = 6
-                | nums <= 20  = 7
-                | nums <= 23  = 8
+                | nums <= 2   = 2
+                | nums <= 5   = 3
+                | nums <= 8   = 4
+                | nums <= 11  = 5
+                | nums <= 14  = 6
+                | nums <= 18  = 7
+                | nums <= 21  = 8
                 |otherwise = 9
                 where nums = head [fst x | x <- chars, snd x == c]
 
@@ -178,10 +176,8 @@ numListToNum nums = (read :: String -> Int) (numListToNum' nums)
 
 wordsToPhone :: String -> Int
 chars' = ['a'..'z']++['A'..'Z']
-wordsToPhone' (x : xs)
-            | xs == [] = show (charToPhoneDigit x)
-            | elem x chars' == False = wordsToPhone' xs
-            | otherwise = (show (charToPhoneDigit x)) ++ (wordsToPhone' xs)
-
-wordsToPhone w = (read :: String -> Int) (wordsToPhone' w)
-
+cleanString w = [ x | x <- w, elem x chars' == True]
+wordsToPhone' (x : xs) 
+                | xs == [] = show (charToPhoneDigit x)
+                | otherwise = (show (charToPhoneDigit x)) ++ (wordsToPhone' xs)
+wordsToPhone w = (read :: String -> Int) (wordsToPhone' (cleanString w))
