@@ -99,16 +99,12 @@ yoCount s = yoCount (tail s)-- a string that doesn't start with "yo" or "Yo". Wh
   [100,110,121,133,146,161]
 -}
 
--- interestTable :: (Eq a, Integral a1, Num a, RealFrac a2) => a2 -> a2 -> a -> [a1]
-intCal p r = round (p * (1 + (0.01 * r)))
-intYear p n = take n (repeat p)
-toInt :: Int -> [Int]
-toInt a = [a]
--- interestTable' p r n = (toInt (intCal p r)) ++ toInt p
+interestTable :: (Eq a, Integral a1, Num a, RealFrac a2) => a2 -> a2 -> a -> [a1]
+interestTable p r 0 = [round p]
+interestTable p r n = [round p] ++ interestTable (p * (1 + 0.01 * r)) r (n-1)
 
-interestTable p r n = [round (p * ((1 + 0.01 * r) ^ x)) | x <- [0..n]] -- it's not recursive but it works...
-                
--- What is the syntax for Haskell's round function?
+-- interestTable' p r n = [round (p * ((1 + 0.01 * r) ^ x)) | x <- [0..n]] -- it's not recursive but it works...
+
 {- 
     
   Create a function called charToPhoneDigit that accepts an upper and/or
