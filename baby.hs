@@ -98,3 +98,60 @@ myCompare a b
 calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
 calcBmis xs = [bmi w h | (w, h) <- xs]  
     where bmi weight height = weight / height ^ 2  
+
+-- applyTwice :: (a -> a) -> a -> a  
+applyTwice f x = f (f x)  
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]  
+zipWith' _ [] _ = []  
+zipWith' _ _ [] = []  
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys  
+
+flip' :: (a -> b -> c) -> b -> a -> c  
+flip' f y x = f x y  
+
+-- filter :: (a -> Bool) -> [a] -> [a]  
+filter' _ [] = []  
+filter' p (x:xs)   
+    | p x       = x : filter' p xs  
+    | otherwise = filter' p xs 
+    
+quicksort :: (Ord a) => [a] -> [a]    
+quicksort [] = []    
+quicksort (x:xs) =     
+    let smallerSorted = quicksort (filter (<=x) xs)  
+        biggerSorted = quicksort (filter (>x) xs)   
+    in  smallerSorted ++ [x] ++ biggerSorted  
+
+len x = length x == 3
+
+chain :: (Integral a) => a -> [a]  
+chain 1 = [1]  
+chain n  
+    | even n =  n:chain (n `div` 2)  
+    | odd n  =  n:chain (n*3 + 1)  
+    
+numLongChains :: Int  
+numLongChains = length (filter isLong (map chain [1..100]))  
+    where isLong xs = length xs > 15  
+
+addTwoNums a b = a + b
+
+func = \a -> a:a:[]
+strs = ["what", "lol", "wheat", "wat"]
+xF a = a ** 2
+yF a = a/2
+
+elem' :: (Eq a) => a -> [a] -> Bool  
+elem' y ys = foldl (\acc x -> if x == y then True else acc) False ys  
+
+map' f xs = foldr (\x acc -> f x : acc) [] xs
+-- [x | x <- [map chain [1 .. 100]], length x > 80]
+
+main = do     
+    c <- getChar  
+    if c /= ' '  
+        then do  
+            putChar c  
+            main  
+        else return ()
